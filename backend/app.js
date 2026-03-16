@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 
 import userRouter from './src/routes/user.route.js';
+import staffRouter from './src/routes/staff.route.js';
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", userRouter);
+app.use("/api/staff", staffRouter);
 
 app.use((req, res, next) => {
     return next(new APiError(404, "Resource not found"));
