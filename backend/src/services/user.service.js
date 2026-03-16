@@ -58,7 +58,7 @@ class UserService {
         });
 
         const result = await User.findByIdAndUpdate(
-            id, { $set: payload}, {new: true}
+            id, { $set: payload}, {new: true, runValidators: true}
         );
 
         if(!result) {

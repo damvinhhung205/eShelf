@@ -17,7 +17,7 @@ class StaffService {
             }
         });
 
-        staffData.password = await bcrypt.hash(payload.paddword, 20);
+        staffData.password = await bcrypt.hash(payload.password, 10);
 
         const staff = new Staff(staffData);
         return await staff.save();

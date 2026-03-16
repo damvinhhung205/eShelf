@@ -1,4 +1,4 @@
-import ApiError from '../utils/ApiError.js';
+import ApiError from '../api-error.js';
 import StaffService from '../services/staff.service.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -45,7 +45,7 @@ export async function findAll(req, res, next) {
         console.log(error);
         return next(new ApiError(500, "An error occurred while retrieving the list of staff"));
     }
-    res.json({ documents });
+    res.json(documents);
 }
 
 export async function findOne(req, res, next) {
@@ -113,7 +113,7 @@ export async function login(req, res, next) {
             return next(new ApiError(400, "Username and password are required"));
         }
 
-        const staff = await staffService.findByUsername(uername);
+        const staff = await staffService.findByUsername(username);
         if (!staff) {
             return next(new ApiError(404, "Staff not found"));
         }
