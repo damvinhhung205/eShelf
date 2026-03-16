@@ -154,7 +154,7 @@ export async function login(req, res, next) {
       return next(new ApiError(401, "Invalid username or password"));
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
