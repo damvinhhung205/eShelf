@@ -1,17 +1,17 @@
 import mongoose from 'mongoose';
 
 const borrowSchema = new mongoose.Schema({
-    user: {
+    userID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    staff: {
+    staffID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Staff',
         required: true
     },
-    book: {
+    bookID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Book',
         required: true

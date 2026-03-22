@@ -21,7 +21,7 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    publisher: {
+    publisherID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Publisher',
         required: true
