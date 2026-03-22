@@ -1,5 +1,5 @@
-import BookService from "../services/book.service";
-import ApiError from "../api-error";
+import BookService from "../services/book.service.js";
+import ApiError from "../api-error.js";
 
 const bookService = new BookService();
 
