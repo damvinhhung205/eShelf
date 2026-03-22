@@ -8,7 +8,7 @@ class BookService {
                 price: payload.price,
                 quantity: payload.quantity,
                 publishedYear: payload.publishedYear,
-                publisher: payload.publisher,
+                publisherID: payload.publisherID,
                 author: payload.author,
             });
 
@@ -26,11 +26,11 @@ class BookService {
     }
 
     async find(filter) {
-        return await Book.find(filter).populate("publisher");
+        return await Book.find(filter).populate("publisherID");
     }
 
     async findById(id) {
-        return await Book.findOne({ _id: id }).populate("publisher");
+        return await Book.findOne({ _id: id }).populate("publisherID");
     }
 
     async findByName(name) {
