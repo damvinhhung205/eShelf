@@ -16,7 +16,7 @@ export async function create(req, res, next) {
         ) {
             return next(new ApiError(400, "Username, password, and full name are required"));
         }
-        
+
         const existingStaff = await staffService.findByUsername(req.body.username);
         if (existingStaff) {
             return next(new ApiError(409, "Username already exists"));
@@ -106,41 +106,6 @@ export async function deleteAll(req, res, next) {
     }
 }
 
-export async function login(req, res, next) {
-    try {
-        const { username, password } = req.body;
-        if (!username || !password) {
-            return next(new ApiError(400, "Username and password are required"));
-        }
-
-        const staff = await staffService.findByUsername(username);
-        if (!staff) {
-            return next(new ApiError(404, "Staff not found"));
-        }
-
-        const passwordIsCorrect = await bcrypt.compare(password, staff.password);
-        if (!passwordIsCorrect) {
-            return next(new ApiError(401, "Invalid username or password"));
-        }
-
-        const token = jwt.sign({ id: staff._id, username: staff.username }, process.env.JWT_SECRET, {
-            expiresIn: "1h",
-        });
-
-        return res.status(200).json({
-            token,
-            staff: {
-                id: staff._id,
-                username: staff.username,
-                role: staff.role,
-            },
-        });
-    } catch (error) {
-        console.log(error);
-        return next(new ApiError(500, "An error occurred while logging in"));
-    }
-}
-
 export default {
-    create, findAll, findOne, update, deleteOne, deleteAll, login
+    create, findAll, findOne, update, deleteOne, deleteAll,
 }

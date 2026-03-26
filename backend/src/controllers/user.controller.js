@@ -137,41 +137,6 @@ export async function deleteAll(req, res, next) {
   }
 }
 
-export async function login(req, res, next) {
-  try {
-    const { username, password } = req.body;
-    if (!username || !password) {
-      return next(new ApiError(400, "Username or password cannot be empty"));
-    }
-
-    const user = await userService.findByUsername(username);
-    if (!user) {
-      return next(new ApiError(401, "Invalid username or password"));
-    }
-
-    const passwordIsCorrect = await bcrypt.compare(password, user.password);
-    if (!passwordIsCorrect) {
-      return next(new ApiError(401, "Invalid username or password"));
-    }
-
-    const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-
-    return res.status(200).json({
-      token,
-      user: {
-        _id: user._id,
-        username: user.username,
-        role: user.role,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-    return next(new ApiError(500, "An error occurred while logging in"));
-  }
-}
-
 export default {
   create,
   findAll,
@@ -179,5 +144,4 @@ export default {
   update,
   deleteOne,
   deleteAll,
-  login,
 };

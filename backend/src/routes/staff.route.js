@@ -5,7 +5,6 @@ import staffController from "../controllers/staff.controller.js";
 const router = express.Router();
 
 router.post("/register", staffController.create);
-router.post("/login", staffController.login);
 
 router.route("/")
     .post(staffController.create)

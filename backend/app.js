@@ -2,6 +2,7 @@ import APiError from "./src/api-error.js";
 import express from "express";
 import cors from "cors";
 
+import authRouter from "./src/routes/auth.route.js"
 import userRouter from "./src/routes/user.route.js";
 import staffRouter from "./src/routes/staff.route.js";
 import publisherRouter from "./src/routes/publisher.route.js";
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to eShelf" });
 });
 
+app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/publisher", publisherRouter);
